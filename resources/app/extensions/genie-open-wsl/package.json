@@ -1,0 +1,329 @@
+{
+	"name": "codebuddy-open-wsl",
+	"displayName": "CodeBuddy Remote - WSL",
+	"description": "Open any folder in the Windows Subsystem for Linux (WSL).",
+	"version": "0.0.5",
+	"publisher": "CodeBuddy",
+	"repository": {
+		"url": "https://www.codebuddy.ai/"
+	},
+	"bugs": {
+		"url": "https://www.codebuddy.ai/"
+	},
+	"icon": "resources/icon.png",
+	"engines": {
+		"vscode": "^1.70.2"
+	},
+	"extensionKind": [
+		"ui"
+	],
+	"enabledApiProposals": [
+		"resolvers",
+		"contribViewsRemote"
+	],
+	"keywords": [
+		"remote development",
+		"remote",
+		"wsl"
+	],
+	"api": "none",
+	"activationEvents": [
+		"onCommand:codebuddy.openremotewsl.connect",
+		"onCommand:codebuddy.openremotewsl.connectInNewWindow",
+		"onCommand:codebuddy.openremotewsl.connectUsingDistro",
+		"onCommand:codebuddy.openremotewsl.connectUsingDistroInNewWindow",
+		"onCommand:codebuddy.openremotewsl.showLog",
+		"onResolveRemoteAuthority:codebuddy-wsl",
+		"onView:codeBuddyWslTargets"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"configuration": {
+			"title": "CodeBuddy Remote - WSL",
+			"properties": {
+				"codebuddy.remote.WSL.serverDownloadTimeout": {
+					"type": "number",
+					"default": 300000,
+					"description": "Timeout for server download in milliseconds",
+					"scope": "application",
+					"minimum": 30000
+				},
+				"codebuddy.remote.WSL.serverInstallTimeout": {
+					"type": "number",
+					"default": 120000,
+					"description": "Timeout for server installation in milliseconds",
+					"scope": "application",
+					"minimum": 60000
+				},
+				"codebuddy.remote.WSL.enableServerLogging": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable detailed server logging",
+					"scope": "application"
+				},
+				"codebuddy.remote.WSL.serverDownloadUrlTemplate": {
+					"type": "string",
+					"description": "The URL from where the vscode server will be downloaded. You can use the following variables and they will be replaced dynamically:\n- ${quality}: vscode server quality, e.g. stable or insiders\n- ${version}: vscode server version, e.g. 1.69.0\n- ${commit}: vscode server release commit\n- ${arch}: vscode server arch, e.g. x64, armhf, arm64\n- ${release}: release number, vscodium only https://github.com/VSCodium/vscodium/pull/1192",
+					"scope": "application"
+				},
+				"codebuddy.remote.WSL.defaultExtensions": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "List of extensions that should be installed automatically on all WSL hosts.",
+					"scope": "application"
+				}
+			}
+		},
+		"views": {
+			"remote": [
+				{
+					"id": "codeBuddyWslTargets",
+					"name": "WSL Targets",
+					"group": "targets@1",
+					"when": "(isWindows && !isWeb)",
+					"remoteName": "codebuddy wsl"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "codebuddy.openremotewsl.connect",
+				"title": "Connect to WSL",
+				"category": "Remote-WSL"
+			},
+			{
+				"command": "codebuddy.openremotewsl.connectInNewWindow",
+				"title": "Connect to WSL in New Window",
+				"category": "Remote-WSL"
+			},
+			{
+				"command": "codebuddy.openremotewsl.connectUsingDistro",
+				"title": "Connect to WSL using Distro...",
+				"category": "Remote-WSL"
+			},
+			{
+				"command": "codebuddy.openremotewsl.connectUsingDistroInNewWindow",
+				"title": "Connect to WSL using Distro in New Window...",
+				"category": "Remote-WSL"
+			},
+			{
+				"command": "codebuddy.openremotewsl.showLog",
+				"title": "Show Log",
+				"category": "Remote-WSL"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.emptyWindowInNewWindow",
+				"title": "Connect in New Window",
+				"icon": "$(empty-window)"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.emptyWindowInCurrentWindow",
+				"title": "Connect in Current Window"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.reopenFolderInCurrentWindow",
+				"title": "Open in Current Window"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.reopenFolderInNewWindow",
+				"title": "Open in New Window",
+				"icon": "$(folder-opened)"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.deleteFolderHistoryItem",
+				"title": "Remove From Recent List",
+				"icon": "$(x)"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.refresh",
+				"title": "Refresh",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.addDistro",
+				"title": "Add a Distro",
+				"icon": "$(plus)"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.setDefaultDistro",
+				"title": "Set as Default Distro"
+			},
+			{
+				"command": "codebuddy.openremotewsl.explorer.deleteDistro",
+				"title": "Delete Distro"
+			}
+		],
+		"resourceLabelFormatters": [
+			{
+				"scheme": "vscode-remote",
+				"authority": "wsl+*",
+				"formatting": {
+					"label": "${path}",
+					"separator": "/",
+					"tildify": true,
+					"workspaceSuffix": "WSL"
+				}
+			}
+		],
+		"menus": {
+			"statusBar/remoteIndicator": [
+				{
+					"command": "codebuddy.openremotewsl.connect",
+					"when": "(isWindows && !isWeb)",
+					"group": "remote_20_wsl_1general@1"
+				},
+				{
+					"command": "codebuddy.openremotewsl.connectUsingDistro",
+					"when": "(isWindows && !isWeb)",
+					"group": "remote_20_wsl_1general@2"
+				},
+				{
+					"command": "codebuddy.openremotewsl.showLog",
+					"when": "remoteName =~ /^wsl$/",
+					"group": "remote_20_wsl_1general@4"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "codebuddy.openremotewsl.connect",
+					"when": "(isWindows && !isWeb)"
+				},
+				{
+					"command": "codebuddy.openremotewsl.connectInNewWindow",
+					"when": "(isWindows && !isWeb)"
+				},
+				{
+					"command": "codebuddy.openremotewsl.connectUsingDistro",
+					"when": "(isWindows && !isWeb)"
+				},
+				{
+					"command": "codebuddy.openremotewsl.connectUsingDistroInNewWindow",
+					"when": "(isWindows && !isWeb)"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.refresh",
+					"when": "false"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.addDistro",
+					"when": "false"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.emptyWindowInNewWindow",
+					"when": "false"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.emptyWindowInCurrentWindow",
+					"when": "false"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.reopenFolderInCurrentWindow",
+					"when": "false"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.reopenFolderInNewWindow",
+					"when": "false"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.deleteFolderHistoryItem",
+					"when": "false"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.setDefaultDistro",
+					"when": "false"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.deleteDistro",
+					"when": "false"
+				}
+			],
+			"view/title": [
+				{
+					"command": "codebuddy.openremotewsl.explorer.addDistro",
+					"when": "view == codeBuddyWslTargets",
+					"group": "navigation"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.refresh",
+					"when": "view == codeBuddyWslTargets",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "codebuddy.openremotewsl.explorer.emptyWindowInNewWindow",
+					"when": "viewItem =~ /^codebuddy.openremotewsl.explorer.distro$/",
+					"group": "inline@1"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.emptyWindowInNewWindow",
+					"when": "viewItem =~ /^codebuddy.openremotewsl.explorer.distro$/",
+					"group": "navigation@2"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.emptyWindowInCurrentWindow",
+					"when": "viewItem =~ /^codebuddy.openremotewsl.explorer.distro$/",
+					"group": "navigation@1"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.setDefaultDistro",
+					"when": "viewItem =~ /^codebuddy.openremotewsl.explorer.distro$/",
+					"group": "management@1"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.deleteDistro",
+					"when": "viewItem =~ /^codebuddy.openremotewsl.explorer.distro$/",
+					"group": "management@2"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.reopenFolderInNewWindow",
+					"when": "viewItem == codebuddy.openremotewsl.explorer.folder",
+					"group": "inline@1"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.reopenFolderInNewWindow",
+					"when": "viewItem == codebuddy.openremotewsl.explorer.folder",
+					"group": "navigation@2"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.reopenFolderInCurrentWindow",
+					"when": "viewItem == codebuddy.openremotewsl.explorer.folder",
+					"group": "navigation@1"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.deleteFolderHistoryItem",
+					"when": "viewItem =~ /^codebuddy.openremotewsl.explorer.folder/",
+					"group": "navigation@3"
+				},
+				{
+					"command": "codebuddy.openremotewsl.explorer.deleteFolderHistoryItem",
+					"when": "viewItem =~ /^codebuddy.openremotewsl.explorer.folder/",
+					"group": "inline@2"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"postinstall": "yarn update-dts",
+		"vscode:prepublish": "webpack --mode production",
+		"webpack": "webpack --mode development",
+		"compile": "tsc -b",
+		"watch": "tsc -b -w",
+		"package": "npx vsce package --yarn",
+		"update-dts": "npx vscode-dts dev && npx vscode-dts main"
+	},
+	"devDependencies": {
+		"@types/node": "^16.17.1",
+		"@types/webpack": "^5.28.2",
+		"@typescript-eslint/eslint-plugin": "^6.5.0",
+		"@typescript-eslint/parser": "^6.5.0",
+		"eslint": "^8.48.0",
+		"eslint-plugin-jsdoc": "^46.5.1",
+		"ts-loader": "^9.4.4",
+		"typescript": "^5.2.2",
+		"webpack": "^5.88.2",
+		"webpack-cli": "^5.1.4"
+	}
+}

@@ -1,0 +1,302 @@
+{
+	"variables": [{
+		"id": "file",
+		"name": "File & Folders",
+		"description": "Select Files and Folders",
+		"type": "file",
+		"disabled": false
+	}, {
+		"id": "diff",
+		"name": "Diff",
+		"description": "Document changes",
+		"type": "diff",
+		"disabled": false
+	}, {
+		"id": "knowledge",
+		"name": "Docs",
+		"description": "Select Knowledge Base",
+		"type": "knowledge",
+		"disabled": false
+	}, {
+		"id": "terminal",
+		"name": "Terminal",
+		"description": "The last command executed by the terminal",
+		"type": "terminal",
+		"disabled": false
+	}, {
+		"id": "agent",
+		"name": "Agent",
+		"description": "Select Agent",
+		"type": "topic",
+		"disabled": false
+	}],
+	"models": [{
+		"id": "claude-3.7",
+		"name": "Claude-3.7-Sonnet",
+		"vendor": "e",
+		"maxOutputTokens": 8192,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000
+	}, {
+		"id": "claude-4.0",
+		"name": "Claude-4.0-Sonnet",
+		"vendor": "e",
+		"maxOutputTokens": 24000,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000,
+		"isDefault": true
+	}, {
+		"id": "gpt-5",
+		"name": "GPT-5",
+		"vendor": "e",
+		"maxOutputTokens": 128000,
+		"maxInputTokens": 272000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 80000
+	}, {
+		"id": "gpt-5-mini",
+		"name": "GPT-5-mini",
+		"vendor": "e",
+		"maxOutputTokens": 128000,
+		"maxInputTokens": 272000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 80000
+	}, {
+		"id": "gpt-5-nano",
+		"name": "GPT-5-nano",
+		"vendor": "e",
+		"maxOutputTokens": 128000,
+		"maxInputTokens": 272000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 80000
+	}, {
+		"id": "o4-mini",
+		"name": "GPT-4o-mini",
+		"vendor": "e",
+		"maxOutputTokens": 32000,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000
+	}, {
+		"id": "chat-1.0",
+		"name": "chat-1.0",
+		"vendor": "f",
+		"maxOutputTokens": 32000,
+		"supportsToolCall": true,
+		"supportsImages": false
+	}, {
+		"id": "completion-1.0",
+		"name": "completion-1.0",
+		"vendor": "j",
+		"maxOutputTokens": 256,
+		"supportsExtra": true
+	}, {
+		"id": "completion-1.2",
+		"name": "completion-1.2",
+		"vendor": "j",
+		"maxOutputTokens": 256,
+		"supportsExtra": true
+	}, {
+		"id": "nes-1.0",
+		"name": "nes-1.0",
+		"vendor": "f",
+		"maxOutputTokens": 256
+	}, {
+		"id": "nes-1.1",
+		"name": "nes-1.1",
+		"vendor": "f",
+		"maxOutputTokens": 8192
+	}, {
+		"id": "nes-1.2",
+		"name": "nes-1.2",
+		"vendor": "f",
+		"maxOutputTokens": 32000,
+		"supportsToolCall": true,
+		"supportsImages": true
+	}, {
+		"id": "gemini-2.5-flash",
+		"name": "Gemini-2.5-Flash",
+		"maxOutputTokens": 16384,
+		"maxInputTokens": 1000000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000
+	}, {
+		"id": "gemini-2.5-pro",
+		"name": "Gemini-2.5-Pro",
+		"maxOutputTokens": 16384,
+		"maxInputTokens": 1000000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000
+	}],
+	"agents": [{
+		"name": "agent",
+		"description": "agent",
+		"models": ["claude-3.7", "claude-4.0", "o4-mini", "gemini-2.5-flash", "gemini-2.5-pro", "gpt-5", "gpt-5-mini", "gpt-5-nano"]
+	}, {
+		"name": "chat",
+		"description": "chat",
+		"models": ["claude-3.7", "claude-4.0", "o4-mini", "gemini-2.5-flash", "gemini-2.5-pro", "gpt-5", "gpt-5-mini", "gpt-5-nano"]
+	}, {
+		"name": "enhance prompt",
+		"description": "enhance prompt",
+		"models": ["nes-1.2"]
+	}, {
+		"description": "Code Completion agent",
+		"models": ["completion-1.0", "nes-1.0"],
+		"name": "CodeCompletion"
+	}, {
+		"description": "Code Completion agent for NES",
+		"instructions": "code-completion-nes-prompt",
+		"models": ["nes-1.2"],
+		"name": "CodeCompletionNes",
+		"variables": ["activeEditor", "workspaceFileDiffs", "diagnostics"]
+	}, {
+		"description": "Generate commit message",
+		"instructions": "commit-message-generate-prompt",
+		"models": ["nes-1.2"],
+		"name": "CommitMessage",
+		"variables": ["userInfo", "vcsDiffs", "vcsLogs", "systemInfo"]
+	}, {
+		"description": "Proxy To Remote Agent",
+		"models": ["nes-1.1"],
+		"name": "RemoteAgentProxy"
+	}],
+	"commands": [{
+		"name": "cr",
+		"description": "code review",
+		"prompt": "code-review-prompt",
+		"expand": "Please refer to the provided reference information, and conduct a thorough code review, highlighting improvements, potential bugs, and optimizations based on your analysis."
+	}, {
+		"name": "tests",
+		"description": "generate unit tests",
+		"prompt": "unit-test-prompt",
+		"expand": "Please refer to the provided reference information, and generate comprehensive unit tests to validate functionality, including edge cases, based on your understanding of the code."
+	}, {
+		"name": "explain",
+		"description": "Explain how the selected code works",
+		"prompt": "explain-prompt",
+		"expand": "Please refer to the provided reference information, and clearly explain the code's logic, purpose, and key components in your own words."
+	}, {
+		"name": "fix",
+		"description": "Propose a fix for the problems in the selected code",
+		"prompt": "fix-prompt",
+		"expand": "Please refer to the provided reference information to fix my code."
+	}, {
+		"name": "doc",
+		"description": "Generate documentation comments",
+		"agent": "craft",
+		"prompt": "inline-chat-document-prompt"
+	}, {
+		"name": "generate",
+		"virtual": true,
+		"agent": "craft",
+		"prompt": "inline-chat-generate-prompt",
+		"stream": true
+	}, {
+		"name": "edit",
+		"virtual": true,
+		"agent": "craft",
+		"prompt": "inline-chat-edit-prompt"
+	}],
+	"$schema": "product-schema.json",
+	"platform": "CodeBuddyIDE",
+	"endpoint": "https://www.codebuddy.ai",
+	"stagingEndpoint": "https://staging-copilot.tencent.com",
+	"authentication": {
+		"id": "Tencent-Cloud.completing-genie",
+		"type": "ide-host",
+		"label": "TencentCloud",
+		"attributes": {
+			"usernameHeader": "X-User-Id",
+			"usernameEncode": "URLEncode",
+			"tokenHeader": "Authorization",
+			"tokenType": "bearerToken",
+			"startChatAfterCompleted": true,
+			"prefixPath": "/plugin"
+		}
+	},
+	"updates": {
+		"apiVersion": "v2",
+		"download": {
+			"scene": "saas"
+		},
+		"checkVersion": {
+			"scene": "saas"
+		}
+	},
+	"knowledgeBases": [{
+		"provider": "Tencent"
+	}],
+	"commitMessage": {},
+	"config": {},
+	"links": {
+		"craftShellHelpDocument": "https://cloud.tencent.com/document/product/1749/117896",
+		"craftFeedback": "https://cloud.tencent.com/document/product/1749/104249",
+		"helpDocument": "https://cloud.tencent.com/document/product/1749",
+		"issueFeedback": "https://cloud.tencent.com/online-service?from=intro_acc"
+	},
+	"completion": {
+		"sensitivity": "medium",
+		"maxInputTokens": 4000,
+		"maxInputCharacters": 10000,
+		"suffixPercent": 0.2,
+		"currentFileMaxLines": 200
+	},
+	"productFeatures": {
+		"InlineCompletions": true,
+		"InlineChat": false,
+		"NesCompletions": true,
+		"NesCompletionsPrefetching": true,
+		"NesRepeatFilter": true,
+		"NesRangeFix": true,
+		"CursorPositonPrefetching": true,
+		"CompletionsPrefetching": true,
+		"CompletionsResultFusion": true,
+		"MultiFileWithPromptParam": true,
+		"MultiFileWithSeparateParams": false,
+		"CRLFCompatible": true,
+		"TrimByIndentation": true,
+		"MultiStepCompletions": false,
+		"RemoveBelowExist": true,
+		"CompletionsRelatedSnippets": true,
+		"StatusBar": false,
+		"Codebase": false,
+		"Mock": true,
+		"enabledLimitedHint": true,
+		"ReqFrequencyControlBatch": 25,
+		"AttachFileSizeLimit": 20
+	},
+	"featureToggles": {
+		"SupportHttpsAgentProxy": true
+	},
+	"log": {
+		"output": 2
+	},
+	"telemetry": {
+		"report": {
+			"standard": {
+				"enabled": true
+			},
+			"model": {
+				"enabled": true
+			}
+		},
+		"tracing": {
+			"enabled": true
+		}
+	},
+	"tools": [{
+		"name": "semantic_search",
+		"description": "Run a natural language search for relevant code or documentation comments from the user's current workspace. Returns relevant code snippets from the user's current workspace if it is large, or the full contents of the workspace if it is small."
+	}]
+}

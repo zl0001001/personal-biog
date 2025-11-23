@@ -1,0 +1,416 @@
+{
+	"variables": [{
+		"id": "file",
+		"name": "File & Folders",
+		"description": "Select Files and Folders",
+		"type": "file",
+		"disabled": false
+	}, {
+		"id": "diff",
+		"name": "Diff",
+		"description": "Document changes",
+		"type": "diff",
+		"disabled": false
+	}, {
+		"id": "knowledge",
+		"name": "Docs",
+		"description": "Select Knowledge Base",
+		"type": "knowledge",
+		"disabled": false
+	}, {
+		"id": "terminal",
+		"name": "Terminal",
+		"description": "The last command executed by the terminal",
+		"type": "terminal",
+		"disabled": false
+	}, {
+		"id": "agent",
+		"name": "Agent",
+		"description": "Select Agent",
+		"type": "topic",
+		"disabled": false
+	}],
+	"agents": [{
+		"name": "craft",
+		"description": "craft agent",
+		"models": ["default", "deepseek-v3-0324"],
+		"commands": ["cr", "tests", "fix", "explain"],
+		"tools": ["read_file", "list_files", "search_file", "search_content", "semantic_search", "RAG_search", "execute_command", "write_to_file", "replace_in_file", "delete_files", "unit_test", "plan_attempt_completion", "mcp_server"],
+		"variables": ["file", "diff", "knowledge", "terminal"]
+	}, {
+		"name": "ask",
+		"description": "ask agent",
+		"models": ["deepseek-v3-0324", "deepseek-r1-0528", "hunyuan-chat"],
+		"commands": ["cr", "tests", "fix", "explain"],
+		"tools": ["read_file", "list_files", "search_file", "search_content", "semantic_search", "RAG_search"],
+		"variables": ["file", "diff", "knowledge", "terminal", "agent"]
+	}, {
+		"name": "CodeCompletion",
+		"description": "Code Completion agent",
+		"models": ["hunyuan-7b-dense"]
+	}, {
+		"name": "CodeCompletionNes",
+		"description": "Code Completion agent for NES",
+		"instructions": "code-completion-nes-prompt",
+		"variables": ["activeEditor", "workspaceFileDiffs", "diagnostics"],
+		"models": ["deepseek-v3-0324-taco"]
+	}, {
+		"name": "CommitMessage",
+		"description": "Generate commit message",
+		"instructions": "commit-message-generate-prompt",
+		"variables": ["userInfo", "vcsDiffs", "vcsLogs", "systemInfo"],
+		"models": ["deepseek-v3-0324"]
+	}, {
+		"name": "RemoteAgentProxy",
+		"description": "Proxy To Remote Agent",
+		"models": ["deepseek-v3-0324-taco"]
+	}, {
+		"name": "InlineChat",
+		"description": "inline chat agent",
+		"models": ["deepseek-v3-0324"],
+		"commands": ["doc", "generate", "edit", "tests", "fix", "explain"]
+	}, {
+		"name": "agent",
+		"description": "agent",
+		"models": ["hunyuan-chat", "deepseek-v3-0324-lkeap", "deepseek-r1-0528-lkeap"]
+	}, {
+		"name": "chat",
+		"description": "chat",
+		"models": ["hunyuan-chat", "deepseek-v3-0324-lkeap", "deepseek-r1-0528-lkeap"]
+	}, {
+		"name": "enhance prompt",
+		"description": "enhance prompt",
+		"models": ["deepseek-v3-0324-lkeap"]
+	}],
+	"models": [{
+		"id": "claude-3.7",
+		"name": "Claude-3.7-Sonnet",
+		"vendor": "e",
+		"maxOutputTokens": 8192,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000,
+		"credits": "x0.1 credits"
+	}, {
+		"id": "claude-4.0",
+		"name": "Claude-4.0-Sonnet",
+		"vendor": "e",
+		"maxOutputTokens": 24000,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000
+	}, {
+		"id": "gpt-5",
+		"name": "GPT-5",
+		"vendor": "e",
+		"maxOutputTokens": 128000,
+		"maxInputTokens": 272000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 80000
+	}, {
+		"id": "gpt-5-mini",
+		"name": "GPT-5-mini",
+		"vendor": "e",
+		"maxOutputTokens": 128000,
+		"maxInputTokens": 272000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 80000
+	}, {
+		"id": "gpt-5-nano",
+		"name": "GPT-5-nano",
+		"vendor": "e",
+		"maxOutputTokens": 128000,
+		"maxInputTokens": 272000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 80000
+	}, {
+		"id": "o4-mini",
+		"name": "GPT-4o-mini",
+		"vendor": "e",
+		"maxOutputTokens": 32000,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000
+	}, {
+		"id": "gemini-2.5-flash",
+		"name": "Gemini-2.5-Flash",
+		"maxOutputTokens": 16384,
+		"maxInputTokens": 1000000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000
+	}, {
+		"id": "gemini-2.5-pro",
+		"name": "Gemini-2.5-Pro",
+		"maxOutputTokens": 16384,
+		"maxInputTokens": 1000000,
+		"supportsToolCall": true,
+		"supportsImages": true,
+		"maxAllowedSize": 40000
+	}, {
+		"id": "deepseek-v3-0324-lkeap",
+		"name": "deepseek-v3-0324",
+		"vendor": "f",
+		"maxOutputTokens": 8192,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": false,
+		"disabledMultimodal": true
+	}, {
+		"id": "completion-gf",
+		"name": "completion-gf",
+		"vendor": "j",
+		"maxOutputTokens": 8192,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": false,
+		"disabledMultimodal": true
+	}, {
+		"id": "hunyuan-chat",
+		"name": "hunyuan-turbos",
+		"vendor": "j",
+		"maxOutputTokens": 8192,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": false,
+		"disabledMultimodal": true
+	}, {
+		"id": "deepseek-v3-0324-gf",
+		"name": "deepseek-v3-0324",
+		"vendor": "f",
+		"maxOutputTokens": 8192,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": false,
+		"disabledMultimodal": true
+	}, {
+		"id": "deepseek-r1-0528-gf",
+		"name": "deepseek-r1-0528",
+		"vendor": "f",
+		"maxOutputTokens": 8192,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": false,
+		"disabledMultimodal": true
+	}, {
+		"id": "deepseek-r1-0528-lkeap",
+		"name": "deepseek-r1-0528",
+		"vendor": "f",
+		"maxOutputTokens": 8192,
+		"maxInputTokens": 200000,
+		"supportsToolCall": true,
+		"supportsImages": false,
+		"disabledMultimodal": true
+	}, {
+		"id": "default-1.1",
+		"name": "Claude-3.7-Sonnet",
+		"vendor": "e",
+		"maxOutputTokens": 8192,
+		"supportsToolCall": true,
+		"supportsImages": true
+	}, {
+		"id": "hunyuan-3b",
+		"name": "hunyuan-3b",
+		"vendor": "tencent",
+		"maxOutputTokens": 256,
+		"supportsExtra": true
+	}, {
+		"id": "hunyuan-7b-dense",
+		"name": "hunyuan-7b",
+		"vendor": "tencent",
+		"maxOutputTokens": 256,
+		"supportsExtra": true
+	}, {
+		"id": "deepseek-r1-0528",
+		"name": "deepseek-r1",
+		"vendor": "tencent",
+		"maxOutputTokens": 256,
+		"supportsExtra": true
+	}, {
+		"id": "deepseek-v3-0324-taco-completion",
+		"name": "deepseek-v3-0324",
+		"vendor": "tencent",
+		"maxOutputTokens": 256
+	}, {
+		"id": "deepseek-v3-0324-taco",
+		"name": "deepseek-v3-taco",
+		"vendor": "tencent",
+		"maxOutputTokens": 8192
+	}, {
+		"id": "deepseek-v3-0324",
+		"name": "deepseek-v3",
+		"vendor": "tencent",
+		"maxOutputTokens": 8192
+	}, {
+		"id": "default-1.2",
+		"name": "Claude-4.0-Sonnet",
+		"vendor": "e",
+		"maxOutputTokens": 8192,
+		"supportsToolCall": true,
+		"supportsImages": true
+	}],
+	"commands": [{
+		"name": "cr",
+		"description": "code review",
+		"prompt": "code-review-prompt",
+		"expand": "Please refer to the provided reference information, and conduct a thorough code review, highlighting improvements, potential bugs, and optimizations based on your analysis."
+	}, {
+		"name": "tests",
+		"description": "generate unit tests",
+		"prompt": "unit-test-prompt",
+		"expand": "Please refer to the provided reference information, and generate comprehensive unit tests to validate functionality, including edge cases, based on your understanding of the code."
+	}, {
+		"name": "explain",
+		"description": "Explain how the selected code works",
+		"prompt": "explain-prompt",
+		"expand": "Please refer to the provided reference information, and clearly explain the code's logic, purpose, and key components in your own words."
+	}, {
+		"name": "fix",
+		"description": "Propose a fix for the problems in the selected code",
+		"prompt": "fix-prompt",
+		"expand": "Please refer to the provided reference information to fix my code."
+	}, {
+		"name": "doc",
+		"description": "Generate documentation comments",
+		"agent": "craft",
+		"prompt": "inline-chat-document-prompt"
+	}, {
+		"name": "generate",
+		"virtual": true,
+		"agent": "craft",
+		"prompt": "inline-chat-generate-prompt",
+		"stream": true
+	}, {
+		"name": "edit",
+		"virtual": true,
+		"agent": "craft",
+		"prompt": "inline-chat-edit-prompt"
+	}],
+	"$schema": "product-schema.json",
+	"platform": "CodeBuddyIDE",
+	"endpoint": "https://www.codebuddy.ai",
+	"stagingEndpoint": "https://staging-copilot.tencent.com",
+	"authentication": {
+		"id": "Tencent-Cloud.completing-genie",
+		"type": "ide-host",
+		"label": "TencentCloud",
+		"attributes": {
+			"usernameHeader": "X-User-Id",
+			"usernameEncode": "URLEncode",
+			"tokenHeader": "Authorization",
+			"tokenType": "bearerToken",
+			"startChatAfterCompleted": true,
+			"prefixPath": "/plugin"
+		}
+	},
+	"updates": {
+		"apiVersion": "v2",
+		"download": {
+			"scene": "saas"
+		},
+		"checkVersion": {
+			"scene": "saas"
+		}
+	},
+	"knowledgeBases": [{
+		"provider": "Tencent"
+	}],
+	"commitMessage": {},
+	"config": {},
+	"links": {
+		"craftShellHelpDocument": "https://cloud.tencent.com/document/product/1749/117896",
+		"craftFeedback": "https://cloud.tencent.com/document/product/1749/104249",
+		"helpDocument": "https://cloud.tencent.com/document/product/1749",
+		"issueFeedback": "https://cloud.tencent.com/online-service?from=intro_acc",
+		"tencentGalleryBaseUrl": "https://marketplace.visualstudio.com/_apis",
+		"chineseGalleryBaseUrl": "https://open-vsx.org",
+		"tencentKnowledgeBaseUrl": "https://knot.woa.com/knowledge/list"
+	},
+	"completion": {
+		"sensitivity": "medium",
+		"maxInputTokens": 4000,
+		"maxInputCharacters": 10000,
+		"suffixPercent": 0.2,
+		"currentFileMaxLines": 200
+	},
+	"prompts": [{
+		"name": "commit-message-generate-prompt",
+		"template": "<system>\n你是一位经验丰富的程序员，你的任务是根据代码变更，输出一条代码提交信息。\n</system>\n\n<task>\n{% if commitMessageType == 'Auto' -%}\n你需要充分阅读和理解本次代码变更内容,然后基于之前的提交历史记录，输出一条相同风格的清晰简要的代码提交信息。\n{%- elif commitMessageType == 'ConventionalCommits' -%}\n你需要充分阅读和理解本次代码变更内容,然后遵守 Conventional 代码提交规范，输出一条清晰简要的代码提交信息。\n{%- elif commitMessageType == 'Default' -%}\n你需要充分阅读和理解本次代码变更内容,然后遵守下面给到的提交规范，输出一条清晰简要的代码提交信息。\n{%- endif %}\n</task>\n\n<context>\n本次代码变更内容：\n\\`\\`\\`\n{{ vcsDiffs }}\n\\`\\`\\`\n\n{% if commitMessageType == 'Auto' -%}\n之前的提交历史记录供你参考：\n{{ vcsLogs }}\n{%- endif %}\n</context>\n\n{% if commitMessageType == 'ConventionalCommits' -%}\n遵循格式：\n提交信息主要包括四个字段：type（必须）、scope（可选）、subject（必须），和 body（可选）。\n    - feat：新增功能\n    - fix：修复 bug\n    - docs：修改文档\n    - style：修改格式，不影响代码运行的修改\n    - refactor：重构，既不是新增功能，也不是修改 bug 的代码变动\n    - test：增加测试，或修改已存在的测试\n    - chore：其他杂项修改，包括构建过程或辅助工具的变动\n- scope 用于说明提交影响范围，比如数据层、控制层、视图层等等，视项目不同而不同；\n- subject 是提交目的的简短描述，**不超过 50 个字符，使用命令式和现在时**；\n- body 是对提交的更多描述，说明变更内容和动机（与之前行为对比），不超过 72 字符，使用现在时，**如果 subject 足够交代清楚本次提交目的，则不需要 body**\n\n输出结果的格式如下：\n<type>(<scope>): <subject>\n<body>\n\n{%- elif commitMessageType == 'Default' -%}\n遵循格式：\n提交信息主要包括两个个字段：type和subject。\n    - feat：新增功能\n    - fix：修复 bug\n    - docs：修改文档\n    - style：修改格式，不影响代码运行的修改\n    - refactor：重构，既不是新增功能，也不是修改 bug 的代码变动\n    - test：增加测试，或修改已存在的测试\n    - chore：其他杂项修改，包括构建过程或辅助工具的变动\n- subject 是提交目的的简短描述，**不超过 50 个字符，使用命令式和现在时**；\n\n输出结果的格式如下：\n<type>: <subject>\n\n{%- endif %}\n{% if commitMessageType == 'ConventionalCommits' -%}\n这是一些示例：\nfeat(authentication): 更新access_tokens相关组件及逻辑。\n{%- elif commitMessageType == 'Default' -%}\n这是一些示例：\nfeat: 更新access_tokens相关组件及逻辑。\n{%- endif %}\n\n其他要求：\n1. 输出结果的返回语言是 {{ commitMessageLanguage }}\n2. 输出结果仅包含提交信息，不允许包含其他内容\n"
+	}, {
+		"name": "inline-chat-document-prompt",
+		"template": "<system>\n你是一位经验丰富的程序员，你的任务是根据代码，编写代码的文档注释。\n</system>\n\n<task>\n为选定的代码编写简要的文档注释。\n如果所选文件中或其他相同扩展名的文件中已有文档注释，请以它们为参考示例。\n注意所选代码的作用范围（例如，是导出的函数/API，还是函数内部的实现细节），并采用符合该代码范围的惯用风格。\n\n{% if userInput -%}{{ userInput }}{%- endif %}\n</task>\n\n<context>\n代码内容：\n```{{ activeEditor.language }}\n{% if activeEditor.selectedRanges %}{{ activeEditor.selectedRanges[0].content }}{% endif %}\n```\n</context>\n\n\n其他要求：\n1. 仅返回所选代码的注释文档。\n2. 不要包含任何代码。\n"
+	}, {
+		"name": "inline-chat-generate-prompt",
+		"template": "<system>\n你是一个专业的人工智能编码助手，是编程领域的世界级专家。\n用户需要你接受用户输入的指令，用户的源码始终包含在```块中。\n用户需要你帮忙生成一些新的代码，在你的回复中不要重复用户的任何代码。\n保持你的回答简短且客观。\n附加规则：\n- 生成的代码应具有可读性，并保持正确的缩进\n- 使用 markdown 代码块来表示返回的代码内容，并且应该始终有且仅有一个代码块返回\n- 不需要对返回的代码块做额外的解释说明或总结说明\n- 根据用户输入的指令，根据给定的操作说明，你可以重构、修复或增强现有代码。\n- 如果是对代码块进行解释的场景，请以代码注释的方式返回 markdown 代码块\n- 其要密切关注所选内容或上下文，保持现有代码结构，确保插入的代码块语法正确\n</system>\n\n<task>\n针对需求：\n{{ userInputPrompt }}\n\n生成一段代码，适合放在 $PLACEHOLDER$ 处，代码用 ``` 包裹。\n</task>\n\n<context>\n文件路径：\n{{ activeEditor.filePath }}\n代码内容：\n```{{ activeEditor.language }}\n{%- if activeEditor.selectedRanges %}\n{{  activeEditor.selectedRanges[0].contentBeforeSelection -}}\n$PLACEHOLDER$\n{{-  activeEditor.selectedRanges[0].contentAfterSelection }}\n{% endif -%}\n```\n</context>\n\n\n其他要求：\n1. 代码用 ``` 包裹\n"
+	}, {
+		"name": "inline-chat-edit-prompt",
+		"template": "<system>\n你是一个专业的人工智能编码助手，是编程领域的世界级专家。用户需要你接受用户输入的指令，按照要求返回代码块。保持你的回答简短且客观。\n附加规则：\n- 生成的代码应具有可读性，并确保插入的代码保持正确的缩进\n- 使用 markdown 代码块来表示返回的代码内容，并且应该始终有且仅有一个代码块返回\n- 不需要对返回的代码块做额外的解释说明或总结说明\n- 根据用户输入的指令，根据给定的操作说明，你可以重构、修复或增强现有代码。\n- 如果是对代码块进行解释或添加注释，请以代码注释的方式返回 markdown 代码块，并确保返回的代码块包含编辑后的代码，而不仅仅是注释\n- 其要密切关注所选内容或上下文，保持现有代码结构，确保插入的代码块语法正确\n重要规则：\n- 必须返回完整的最终代码\n- 必须使用```包裹代码\n- 即使没有修改也要返回原代码\n</system>\n\n<task>\n针对需求：\n{{ userInputPrompt }}\n\n生成一段代码，适合替换掉 $SELECTION_PLACEHOLDER$ 处，代码用 ``` 包裹。\n</task>\n\n<context>\n文件路径：\n{{ activeEditor.filePath }}\n代码内容：\n```{{ activeEditor.language }}\n{%- if activeEditor.selectedRanges %}\n{{  activeEditor.selectedRanges[0].contentBeforeSelection -}}\n$SELECTION_PLACEHOLDER$\n{{-  activeEditor.selectedRanges[0].contentAfterSelection }}\n{% endif -%}\n```\n\n占位符 $SELECTION_PLACEHOLDER$ 的原始代码块内容是：\n```{{ activeEditor.language }}\n{% if activeEditor.selectedRanges -%}\n{{  activeEditor.selectedRanges[0].content }}\n{% endif -%}\n```\n</context>\n\n\n其他要求：\n1. 代码用 ``` 包裹\n"
+	}, {
+		"name": "code-completion-nes-prompt",
+		"template": "<system>\n你是代码预测助手，根据当前代码上下文预测下一步最可能需要的编辑。\n</system>\n\n<task>\n按优先级检查代码：错误修复 > 功能完整 > 代码一致性 > 可维护性\n只有发现明确问题时才建议修改。\n</task>\n\n<rules>\n🔥 **核心约束**：\n1. 只能返回一个编辑建议或NULL。无论任何情况，永远只允许返回一条编辑建议或NULL，禁止返回多条。\n2. 使用编辑窗口显示的行号\n3. 编辑内容必须与原代码不同\n4. 不确定时返回NULL\n5. **严格格式要求**：返回内容必须完全按照以下格式，不得有任何额外说明文字：\n   - NULL（无需修改）\n   - 或者：[起始行号, 结束行号] + 换行 + 替换的具体代码内容\n6. 返回的代码缩进必须与原代码风格一致，保持正确缩进\n7. 行号都是从 1 开始\n\n⚠️ 多个编辑建议是严重违规！\n🚨 任何解释性文字、描述或额外说明都是违规！\n</rules>\n\n<flow>\n1. 检查编辑窗口内容\n2. 发现错误 → 修复最严重的一个，停止\n3. 无错误但有功能缺失 → 补充最重要的一个，停止  \n4. 无缺失但有一致性问题 → 调整最影响的一个，停止\n5. 都无问题 → 返回NULL\n\n🔥 **强制约束**：只选择一个问题修复，忽略其他！\n</flow>\n\n<format>\n**严格输出格式**：\n\n无需改进时，只返回：\nNULL\n\n需要改进时，只返回：\n[起始行号, 结束行号]\n替换的具体代码内容\n\n🚨 **格式违规示例（禁止）**：\n- \"这里需要修复语法错误：[25, 25]...\"\n- \"修复变量命名：[71, 71]...\"  \n- 任何解释性文字\n- 多个[行号, 行号]块\n\n✅ **正确格式示例**：\nNULL\n\n或者：\n[25, 25]\nconst result = await fetchData();\n</format>\n\n<examples>\n**无需改进**：\nNULL\n\n**错误修复示例**：\n修复语法错误（缺少await）：\n[25, 25]\nconst result = await fetchData();\n\n修复类型错误：\n[42, 42]\nreturn computedValue as number;\n\n**功能完整性示例**：\n插入错误处理：\n[30, 30]\nif (!isValid(input)) {\n  return defaultValue;\n}\n\n添加空值检查：\n[18, 18]\nif (!data?.items) return [];\n\n修复条件判断：\n[56, 56]\nif (count > 0 && isValid) {\n\n**代码一致性示例**：\n统一命名规范：\n[35, 35]\nconst userName = response.data.user_name;\n\n修复导入语句：\n[3, 3]\nimport { debounce } from 'lodash';\n\n修复变量命名（多行）：\n[70, 72]\npublic void setJsonSchema(JsonSchema jsonSchema) {\n    this.jsonSchema = jsonSchema;\n}\n\n修复变量命名（单行，原代码：    this.jsonSchema = jsonschema;）：\n[71, 71]\n    this.jsonSchema = jsonSchema;\n\n删除冗余代码：\n[70, 71]\n\n</examples>\n\n\n<context>\n## 📝 编辑窗口 (重点关注，且每行都有行号)\n```{{activeEditor.language}}\n{{editWindow | safe}}\n```\n\n## 🚨 诊断错误\n{% if diagnostics and diagnostics.length > 0 %}\n{% for diagnostic in diagnostics %}\n{% if diagnostic.errors and diagnostic.errors.length > 0 %}\n### {{ diagnostic.filePath }}\n{% for error in diagnostic.errors %}\n- 第{{ error.startLine + 1 }}行第{{ error.startColumn + 1 }}列: \n{{ error.message }}\n{% endfor %}\n{% endif %}\n{% endfor %}\n{% else %}\n无诊断错误\n{% endif %}\n\n## 📚 历史改动参考（按时间从近到远）\n{% if workspaceFileDiffs and workspaceFileDiffs.length > 0 %}\n{% for file in workspaceFileDiffs %}\n{% if file.diffHistory and file.diffHistory.length > 0 %}\n### {{ file.filePath }}\n{% set recentDiffs = file.diffHistory %}\n{% for diff in recentDiffs %}\n```diff\n{{diff | safe}}\n```\n{% endfor %}\n{% endif %}\n{% endfor %}\n{% else %}\n无历史改动\n{% endif %}\n</context>\n"
+	}, {
+		"name": "code-review-prompt",
+		"template": "<system>\n**角色**：你是一名代码评审专家，关注代码质量。现对提交的代码进行深度审查，需按以下规范输出报告：\n\n---\n\n## **审查原则**\n1. **优先级**：功能正确性 > 安全性 > 性能 > 可维护性 > 规范一致性  \n2. **证据驱动**：所有问题必须标明具体文件+行号区间，引用代码片段说明  \n3. **解决方案**：每个问题需提供可落地的改进方案（含代码示例）  \n4. **风险量化**：对严重问题需评估潜在影响（如安全漏洞的CVSS评分）  \n\n---\n\n## **报告模板**\n\n### 总体评价\n✅/⚠️/❌ [优秀/良好/有风险]\n[注：核心优势与关键风险总结，不超过3句话]\n\n### 问题列表\n[注：按问题严重性从高到低排序，严重问题用 🔴 标识，非严重问题用 🟡 标识]\n\n#### {问题序号}. {问题类型} {严重性标识}\n**位置**: `{文件路径}#L{起始行}-L{结束行}`  \n**问题分析**: {言简意赅指出问题本质}\n**修复建议**:\n```Diff\n// FILEPATH: {文件完整路径}\n{修复后代码和原始代码的Diff}\n```\n\n---\n\n### 下一步建议\n[注：如果有写文件的工具，询问用户是否需要自动修复。如果没有，建议用户切换到 Craft 模式去修复]\n\n--- \n\n</system>\n"
+	}, {
+		"name": "unit-test-prompt",
+		"template": "<system>\n你是专业单元测试生成助手，负责为给定代码生成高质量、可执行的测试用例。专注于核心逻辑覆盖和边界条件验证。\n</system>\n\n<task>\n为提供的代码生成最小完备的单元测试套件（如果 unit_test 工具存在，请使用它）。要求：\n1. 覆盖所有核心逻辑路径\n2. 包含典型边界条件\n3. 隔离外部依赖\n4. 符合行业最佳实践\n5. 保持与项目测试框架一致\n\n附加规范：\n- 测试文件必须与待测文件保持相同目录层级\n- 禁止覆盖已存在测试文件内容\n</task>\n\n\n<context>\n{% if relatedFiles|length > 0 %}\n{% for relatedFile in relatedFiles %}\n    {% if relatedFile.relatedType === 'AST_DEPENDENCE' %}\n    相关代码文件：\n    ```{{relatedFile.language}}\n    // FILEPATH: {{ relatedFile.filePath }}\n    {% for content in  relatedFile.contents %}\n    {{content}}\n    {% endfor %}\n    ```\n    {% elif relatedFile.relatedType === 'CURRENT_TEST' %}\n    当前存在的测试文件：\n    ```{{relatedFile.language}}\n    // FILEPATH: {{ relatedFile.filePath }}\n    {% for content in  relatedFile.contents %}\n    {{content}}\n    {% endfor %}\n    ```\n    {% elif relatedFile.relatedType === 'OTHER_TEST' %}\n    示例测试文件：\n    ```{{relatedFile.language}}\n    // FILEPATH: {{ relatedFile.filePath }}\n    {% for content in  relatedFile.contents %}\n    {{content}}\n    {% endfor %}\n    ```\n    {% endif %}\n{% endfor %}\n{% endif %}\n</context>\n"
+	}, {
+		"name": "fix-prompt",
+		"template": "<system>\n你是一位专业的代码优化专家，叫 CodeBuddy，擅长发现代码中的问题并提供高质量的改进方案。你的优化建议既实用又符合工程实践，能够真正提升代码质量。\n</system>\n\n<task>\n分析提供的代码和文件存在的缺陷问题，给出完整的优化方案。\n\n【存在的问题】\n列出代码中最关键的几类问题：\n1. 逻辑漏洞\n2. 安全漏洞\n3. 边界处理问题\n4. 性能问题\n\n【优化后的代码】\n提供优化后的完整代码实现：\n1. 修复已发现的所有问题\n2. 确保代码风格一致\n3. 保持原有功能完整性\n4. 添加必要的注释说明\n\n【优化建议】\n详细说明优化的具体方案：\n1. 每个问题的解决思路\n2. 使用的设计模式或最佳实践\n3. 性能提升的具体方法\n4. 可维护性改进的建议\n</task>\n\n<answer>\n### 问题列表\n[注：按问题严重性从高到低排序，严重问题用 🔴 标识，非严重问题用 🟡 标识]\n\n#### {问题序号}. {问题类型} {严重性标识}\n**位置**: `{文件路径}#L{起始行}-L{结束行}`\n**问题分析**: {言简意赅指出问题本质}\n**修复建议**:\n```Diff\n// FILEPATH: {文件完整路径}\n{修复后代码和原始代码的Diff}\n```\n---\n\n### 下一步建议\n[注：如果有写文件的工具，询问用户是否需要自动修复。如果没有，建议用户切换到 Craft 模式去修复]\n</answer>\n"
+	}, {
+		"name": "explain-prompt",
+		"template": "<system>\n你是一位世界级的编程导师，擅长通过清晰的解释帮助开发者理解代码。你的讲解方式平衡了高层概念和具体细节，确保学习者不仅知道如何编写代码，更能理解编程背后的核心原理。\n</system>\n\n<task>\n为提供的代码内容提供专业的解释说明。要求：\n1. 从整体架构到具体实现逐层分析\n2. 重点突出关键设计决策和实现细节\n3. 说明代码中使用的编程模式和最佳实践\n4. 解释重要的函数和变量的作用\n5. 指出代码中值得学习的亮点\n</task>\n"
+	}],
+	"productFeatures": {
+		"InlineCompletions": true,
+		"InlineChat": false,
+		"NesCompletions": true,
+		"NesCompletionsPrefetching": true,
+		"NesRepeatFilter": true,
+		"NesRangeFix": true,
+		"CursorPositonPrefetching": true,
+		"CompletionsPrefetching": true,
+		"CompletionsResultFusion": true,
+		"MultiFileWithPromptParam": true,
+		"MultiFileWithSeparateParams": false,
+		"CRLFCompatible": true,
+		"TrimByIndentation": true,
+		"MultiStepCompletions": false,
+		"RemoveBelowExist": true,
+		"CompletionsRelatedSnippets": true,
+		"StatusBar": false,
+		"Codebase": true,
+		"enabledLimitedHint": false,
+		"ReqFrequencyControlBatch": 25,
+		"AttachFileSizeLimit": 20
+	},
+	"featureToggles": {
+		"SupportHttpsAgentProxy": true
+	},
+	"log": {
+		"output": 2
+	},
+	"telemetry": {
+		"report": {
+			"standard": {
+				"enabled": true
+			},
+			"model": {
+				"enabled": true
+			}
+		},
+		"tracing": {
+			"enabled": true
+		}
+	},
+	"tools": [{
+		"name": "semantic_search",
+		"description": "Run a natural language search for relevant code or documentation comments from the user's current workspace. Returns relevant code snippets from the user's current workspace if it is large, or the full contents of the workspace if it is small."
+	}]
+}

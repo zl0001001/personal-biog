@@ -1,0 +1,3 @@
+"use strict";(function(){const{ipcRenderer:t,webFrame:n,contextBridge:i}=require("electron");function r(e){if(!e||!e.startsWith("vscode:"))throw new Error(`Unsupported event IPC channel '${e}'`);return!0}const s={ipcRenderer:{send(e,...o){r(e)&&t.send(e,...o)},invoke(e,...o){return r(e),t.invoke(e,...o)}},webFrame:{setZoomLevel(e){typeof e=="number"&&n.setZoomLevel(e)}}};if(process&&process.contextIsolated)try{i.exposeInMainWorld("vscode",s)}catch(e){console.error(e)}else window.vscode=s})();
+
+//# sourceMappingURL=https://main.vscode-cdn.net/sourcemaps/e3faef6a7e3165b36b094b7db69ec05daa1ceb6f-73cd1db49b039ac35c8c6e524951c2382d96c5b3/core/vs/base/parts/sandbox/electron-sandbox/preload-aux.js.map
