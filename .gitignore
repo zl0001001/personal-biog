@@ -1,0 +1,17 @@
+# Ignore everything by default
+*
+
+# Keep git metadata
+!.gitignore
+
+# Keep app entry files
+!package.json
+!package-lock.json
+!vite.config.js
+!index.html
+!supabase-setup.sql
+!netlify.toml
+
+# Keep source code
+!src/
+!src/**
